@@ -28,9 +28,9 @@ When to use?
 * Custom application development or process automation that requires a higher degree of flexibility and control.
 
 ## Streaming
-Each Azure Purview account comes with a fully-managed Event Hub which is accessible via the Atlas Kafka endpoint (Azure Portal > Azure Purview Account > Properties) which exposes two topics:
-* **ATLAS_ENTITIES** - Azure Purview will send notifications about metadata changes to Kafka topic named ATLAS_ENTITIES. Applications interested in metadata changes can monitor for these notifications.
-* **ATLAS_HOOK** - Azure Purview can be notified of metadata changes via notifications to Kafka topic named ATLAS_HOOK.
+Each Azure Purview account comes with a fully-managed Event Hub, which is accessible via the Atlas Kafka endpoint that can be found via Azure Portal > Azure Purview Account > Properties. This allows you to monitor and react to Azure Purview events (i.e. consume), and notify Azure Purview of events when they occur (i.e. publish).
+* **Consume Events** - Azure Purview will send notifications about metadata changes to Kafka topic **ATLAS_ENTITIES**. Applications interested in metadata changes can monitor for these notifications. Supported operations include: `ENTITY_CREATE`, `ENTITY_UPDATE`, `ENTITY_DELETE`, `CLASSIFICATION_ADD`, `CLASSIFICATION_UPDATE`, `CLASSIFICATION_DELETE`.
+* **Publish Events** - Azure Purview can be notified of metadata changes via notifications to Kafka topic **ATLAS_HOOK**. Supported operations include: `ENTITY_CREATE_V2`, `ENTITY_PARTIAL_UPDATE_V2`, `ENTITY_FULL_UPDATE_V2`, `ENTITY_DELETE_V2`.
 
 When to use?
 * Applications or processes that need to publish or consume catalog events (i.e. Apache Atlas) in real-time.
