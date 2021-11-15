@@ -50,28 +50,28 @@ Microsoft provides Azure SDKs to programmatically manage and interact with Azure
 When to use?
 * Recommended over the REST API as the native client libraries (where available) will follow standard programming language conventions in line with the target language that will feel natural to the developer.
 
-Azure SDK for .NET
+**Azure SDK for .NET**
 * [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.account?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Account/1.0.0-beta.1) Azure.Analytics.Purview.Account
 * [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.administration?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Administration/1.0.0-beta.1) Azure.Analytics.Purview.Administration
 * [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.catalog?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Catalog/1.0.0-beta.2) Azure.Analytics.Purview.Catalog
 * [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.scanning?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Scanning/1.0.0-beta.2) Azure.Analytics.Purview.Scanning
 * [Docs](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.purview?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Management.Purview/) Microsoft.Azure.Management.Purview
 
-Azure SDK for Java
+**Azure SDK for Java**
 * [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.analytics.purview.account?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-account/1.0.0-beta.1/jar) com.azure.analytics.purview.account
 * Docs | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-administration/1.0.0-beta.1/jar) com.azure.analytics.purview.administration
 * [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.analytics.purview.catalog?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-catalog/1.0.0-beta.2/jar) com.azure.analytics.purview.catalog
 * [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.analytics.purview.scanning?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-scanning/1.0.0-beta.2/jar) com.azure.analytics.purview.scanning
 * [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.resourcemanager.purview?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure.resourcemanager/azure-resourcemanager-purview/1.0.0-beta.1/jar) com.azure.resourcemanager.purview
 
-Azure SDK for JavaScript
+**Azure SDK for JavaScript**
 * [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-account-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-account) @azure-rest/purview-account
 * [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-administration-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-administration) @azure-rest/purview-administration
 * [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-catalog-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-catalog) @azure-rest/purview-catalog
 * [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-scanning-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-scanning) @azure-rest/purview-scanning
 * [Docs](https://docs.microsoft.com/en-us/javascript/api/@azure/arm-purview/?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure/arm-purview) @azure/arm-purview
 
-Azure SDK for Python
+**Azure SDK for Python**
 * [Docs](https://docs.microsoft.com/en-us/python/api/azure-purview-account/?view=azure-python-preview) | [PyPi](https://pypi.org/project/azure-purview-account/) azure-purview-account
 * [Docs](https://docs.microsoft.com/en-us/python/api/azure-purview-administration/?view=azure-python-preview) | [PyPi](https://pypi.org/project/azure-purview-administration/) azure-purview-administration
 * [Docs](https://docs.microsoft.com/en-us/python/api/azure-purview-catalog/?view=azure-python-preview) | [PyPi](https://pypi.org/project/azure-purview-catalog/) azure-purview-catalog
