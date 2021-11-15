@@ -5,7 +5,7 @@ While Azure Purview provides an out of the box user experience with Purview Stud
 For example:
 * Triggering a scan to run as part of an automated process.
 * Monitoring for metadata changes in real-time.
-* Building your own custom user experiences.
+* Building your own custom user experience.
 
  Azure Purview provides several mechanisms in which we can interact with the underlying platform in an automated and programmatic fashion, spanning both the control plane (i.e. Azure Resource Manager) as well as Azure Purview's multiple data planes (e.g. catalog, scanning, administration, and more).
 
