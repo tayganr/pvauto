@@ -36,9 +36,10 @@ When to use?
 * Applications or processes that need to publish or consume catalog events (i.e. Apache Atlas) in real-time.
 
 ## SDK
+Microsoft provides Azure SDKs to programmatically manage and interact with Azure services. Azure Purview client libraries are available in several languages (.NET, Java, JavaScript, and Python), designed to be consistent, approachable, and idiomatic.
 
 When to use?
-* Custom application development that is able to use one of the supported languages.
+* Recommended over the REST API as the native client libraries (where available) will follow standard programming language conventions in line with the target language that will feel natural to the developer.
 
 Azure SDK for .NET
 * [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.account?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Account/1.0.0-beta.1) Azure.Analytics.Purview.Account
