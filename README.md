@@ -1,6 +1,6 @@
 # Azure Purview Automation
 
-While Azure Purview provides an out of the box user experience with Purview Studio, not all tasks are sutied to the point-and-click nature of the graphical user experience. 
+While Azure Purview provides an out of the box user experience with Purview Studio, not all tasks are suited to the point-and-click nature of the graphical user experience. 
 
 For example:
 * Triggering a scan to run as part of an automated process.
