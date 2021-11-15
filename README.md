@@ -2,23 +2,70 @@
 
 Azure Purview provides several mechanisms in which we can interact with the underlying platform in an automated and programmatic fashion, spanning both the control plane (i.e. Azure Resource Manager) and the data plane (e.g. catalog, scanning, administration, etc). This article provides a summary of the options available, and guidance on what to use when.
 
-## Options
+## Tools
 
 | Tool Type | Tool | Scenario |
 | --- | --- | --- |
-**Command Line** | <ul><li><a href="https://docs.microsoft.com/en-us/cli/azure/purview?view=azure-cli-latest" target="_blank">Azure CLI</a></li><li><a href="https://docs.microsoft.com/en-us/powershell/module/az.purview/?view=azps-6.6.0" target="_blank">Azure Az PowerShell</a></li></ul> | Interactive |
+**Command Line** | <ul><li><a href="https://docs.microsoft.com/en-us/cli/azure/purview?view=azure-cli-latest" target="_blank">Azure CLI</a></li><li><a href="https://docs.microsoft.com/en-us/powershell/module/az.purview/?view=azps-6.6.0" target="_blank">Azure PowerShell</a></li></ul> | Interactive |
 **API** | <ul><li><a href="https://docs.microsoft.com/en-us/rest/api/purview/" target="_blank">REST API</a></li></ul> | On-Demand |
 **Streaming** | <ul><li><a href="https://docs.microsoft.com/en-us/azure/purview/manage-kafka-dotnet" target="_blank">Apache Kafka</a></li></ul> | Real-Time |
 **SDK** | <ul><li><a href="https://docs.microsoft.com/en-us/dotnet/api/overview/azure/?view=azure-dotnet-preview" target="_blank">.NET</a></li><li><a href="https://docs.microsoft.com/en-us/java/api/overview/azure/?view=azure-java-preview" target="_blank">Java</a></li><li><a href="https://docs.microsoft.com/en-us/javascript/api/overview/azure/?view=azure-node-preview" target="_blank">JavaScript</a></li><li><a href="https://docs.microsoft.com/en-us/python/api/overview/azure/?view=azure-python-preview" target="_blank">Python</a></li></ul> | Custom |
 
 ## Command Line
-Best suited for ad-hoc tasks and quick exploratory operations, Azure Purview 
+Azure CLI and Azure PowerShell are command-line tools that enable you to manage Azure resources such as Azure Purview. Note: Only a subset of Azure Purview control plane operations (e.g. account management) are currently available via the command-line, for an up to date list of commands currently available, check out the documentation ([Azure CLI](https://docs.microsoft.com/en-us/cli/azure/purview?view=azure-cli-latest) | [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/module/az.purview/?view=azps-6.6.0)).
+
+* **Azure CLI** - A cross-platform tool that allows the execution of commands through a terminal using interactive command-line prompts or a script. Azure CLI has a **purview extension** that allows for the management of Azure Purview accounts (e.g. `az purview account`).
+* **Azure PowerShell** - A cross-platform task automation program, consisting of a set of cmdlets for managing Azure resources. Azure PowerShell has a module called **Az.Purview** that allows for the management of Azure Purview accounts  (e.g. `Get-AzPurviewAccount`).
+
+When to use?
+* Best suited for ad-hoc tasks and quick exploratory operations.
 
 ## API
-Best suited for...
+REST API's are service endpoints that surface sets of HTTP methods (e.g. `POST`, `GET`, `PUT`, `DELETE`), which can perform create, read, update, or delete (CRUD) operations with the service's resources. Azure Purview exposes a large portion of the Azure Purview platform via multiple [service endpoints](https://docs.microsoft.com/en-us/rest/api/purview/).
+
+When to use?
+* Required operations not available via Azure CLI, Azure PowerShell, or native client libraries.
+* Custom application development or process automation that requires a higher degree of flexibility and control.
 
 ## Streaming
-Best suited for...
+Each Azure Purview account comes with a fully-managed Event Hub which is accessible via the Atlas Kafka endpoint (Azure Portal > Azure Purview Account > Properties) which exposes two topics:
+* **ATLAS_ENTITIES** - Azure Purview will send notifications about metadata changes to Kafka topic named ATLAS_ENTITIES. Applications interested in metadata changes can monitor for these notifications.
+* **ATLAS_HOOK** - Azure Purview can be notified of metadata changes via notifications to Kafka topic named ATLAS_HOOK.
+
+When to use?
+* Applications or processes that need to publish or consume catalog events (i.e. Apache Atlas) in real-time.
 
 ## SDK
-Best suited for...
+
+When to use?
+* Custom application development that is able to use one of the supported languages.
+
+Azure SDK for .NET
+* [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.account?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Account/1.0.0-beta.1) Azure.Analytics.Purview.Account
+* [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.administration?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Administration/1.0.0-beta.1) Azure.Analytics.Purview.Administration
+* [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.catalog?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Catalog/1.0.0-beta.2) Azure.Analytics.Purview.Catalog
+* [Docs](https://docs.microsoft.com/en-us/dotnet/api/azure.analytics.purview.scanning?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Azure.Analytics.Purview.Scanning/1.0.0-beta.2) Azure.Analytics.Purview.Scanning
+* [Docs](https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.management.purview?view=azure-dotnet-preview) | [Nuget](https://www.nuget.org/packages/Microsoft.Azure.Management.Purview/) Microsoft.Azure.Management.Purview
+
+Azure SDK for Java
+* [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.analytics.purview.account?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-account/1.0.0-beta.1/jar) com.azure.analytics.purview.account
+* Docs | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-administration/1.0.0-beta.1/jar) com.azure.analytics.purview.administration
+* [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.analytics.purview.catalog?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-catalog/1.0.0-beta.2/jar) com.azure.analytics.purview.catalog
+* [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.analytics.purview.scanning?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure/azure-analytics-purview-scanning/1.0.0-beta.2/jar) com.azure.analytics.purview.scanning
+* [Docs](https://docs.microsoft.com/en-us/java/api/com.azure.resourcemanager.purview?view=azure-java-preview) | [Maven](https://search.maven.org/artifact/com.azure.resourcemanager/azure-resourcemanager-purview/1.0.0-beta.1/jar) com.azure.resourcemanager.purview
+
+Azure SDK for JavaScript
+* [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-account-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-account) @azure-rest/purview-account
+* [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-administration-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-administration) @azure-rest/purview-administration
+* [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-catalog-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-catalog) @azure-rest/purview-catalog
+* [Docs](https://docs.microsoft.com/en-us/javascript/api/overview/azure/purview-scanning-rest-readme?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure-rest/purview-scanning) @azure-rest/purview-scanning
+* [Docs](https://docs.microsoft.com/en-us/javascript/api/@azure/arm-purview/?view=azure-node-preview) | [npm](https://www.npmjs.com/package/@azure/arm-purview) @azure/arm-purview
+
+Azure SDK for Python
+* [Docs](https://docs.microsoft.com/en-us/python/api/azure-purview-account/?view=azure-python-preview) | [PyPi](https://pypi.org/project/azure-purview-account/) azure-purview-account
+* [Docs](https://docs.microsoft.com/en-us/python/api/azure-purview-administration/?view=azure-python-preview) | [PyPi](https://pypi.org/project/azure-purview-administration/) azure-purview-administration
+* [Docs](https://docs.microsoft.com/en-us/python/api/azure-purview-catalog/?view=azure-python-preview) | [PyPi](https://pypi.org/project/azure-purview-catalog/) azure-purview-catalog
+* [Docs](https://docs.microsoft.com/en-us/python/api/azure-purview-scanning/?view=azure-python-preview) | [PyPi](https://pypi.org/project/azure-purview-scanning/) azure-purview-scanning
+* [Docs](https://docs.microsoft.com/en-us/python/api/azure-mgmt-purview/?view=azure-python) | [PyPi](https://pypi.org/project/azure-mgmt-purview/) azure-mgmt-purview
+
+
