@@ -34,7 +34,7 @@ REST API's are service endpoints that surface sets of HTTP methods (e.g. `POST`,
 
 When to use?
 * Required operations not available via Azure CLI, Azure PowerShell, or native client libraries.
-* Custom application development or process automation that requires a higher degree of flexibility and control.
+* Custom application development or process automation.
 
 ## Streaming
 Each Azure Purview account comes with a fully-managed Event Hub, which is accessible via the Atlas Kafka endpoint that can be found via Azure Portal > Azure Purview Account > Properties. This allows you to monitor and react to Azure Purview events (i.e. consume), and notify Azure Purview of events when they occur (i.e. publish).
