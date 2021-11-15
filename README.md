@@ -1,6 +1,13 @@
 # Azure Purview Automation
 
-Azure Purview provides several mechanisms in which we can interact with the underlying platform in an automated and programmatic fashion, spanning both the control plane (i.e. Azure Resource Manager) as well as Azure Purview's multiple data planes (e.g. catalog, scanning, administration, etc). This article provides a summary of the options available, and guidance on what to use when.
+While Azure Purview provides an out of the box user experience with Purview Studio, not all tasks are sutied to the point-and-click nature of the graphical user experience. For example:
+* Triggering a scan to run as part of an automated process.
+* Monitoring for metadata changes in real-time.
+* Building your own custom user experiences.
+
+ Azure Purview provides several mechanisms in which we can interact with the underlying platform in an automated and programmatic fashion, spanning both the control plane (i.e. Azure Resource Manager) as well as Azure Purview's multiple data planes (e.g. catalog, scanning, administration, and more).
+
+This article provides a summary of the options available, and guidance on what to use when.
 
 ## Tools
 
