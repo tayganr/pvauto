@@ -17,7 +17,8 @@ This article provides a summary of the options available, and guidance on what t
 | --- | --- | --- | --- | --- | --- |
 **Command Line** | <ul><li><a href="https://docs.microsoft.com/en-us/cli/azure/purview?view=azure-cli-latest" target="_blank">Azure CLI</a></li><li><a href="https://docs.microsoft.com/en-us/powershell/module/az.purview/?view=azps-6.6.0" target="_blank">Azure PowerShell</a></li></ul> | Interactive | ✓ | | |
 **API** | <ul><li><a href="https://docs.microsoft.com/en-us/rest/api/purview/" target="_blank">REST API</a></li></ul> | On-Demand | ✓ | ✓ | ✓ |
-**Streaming** | <ul><li><a href="https://docs.microsoft.com/en-us/azure/purview/manage-kafka-dotnet" target="_blank">Apache Kafka</a></li></ul> | Real-Time | | ✓ | |
+**Streaming** (Atlas Kafka) | <ul><li><a href="https://docs.microsoft.com/en-us/azure/purview/manage-kafka-dotnet" target="_blank">Apache Kafka</a></li></ul> | Real-Time | | ✓ | |
+**Streaming** (Diagnostic Logs) | <ul><li><a href="https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?tabs=CMD#destinations" target="_blank">Bring-your-own Event Hub</a></li></ul> | Real-Time | | | ✓ |
 **SDK** | <ul><li><a href="https://docs.microsoft.com/en-us/dotnet/api/overview/azure/?view=azure-dotnet-preview" target="_blank">.NET</a></li><li><a href="https://docs.microsoft.com/en-us/java/api/overview/azure/?view=azure-java-preview" target="_blank">Java</a></li><li><a href="https://docs.microsoft.com/en-us/javascript/api/overview/azure/?view=azure-node-preview" target="_blank">JavaScript</a></li><li><a href="https://docs.microsoft.com/en-us/python/api/overview/azure/?view=azure-python-preview" target="_blank">Python</a></li></ul> | Custom | ✓ | ✓ | ✓ |
 
 ## Command Line
@@ -36,13 +37,21 @@ When to use?
 * Required operations not available via Azure CLI, Azure PowerShell, or native client libraries.
 * Custom application development or process automation.
 
-## Streaming
+## Streaming (Atlas Kafka)
 Each Azure Purview account comes with a fully-managed Event Hub, which is accessible via the Atlas Kafka endpoint that can be found via Azure Portal > Azure Purview Account > Properties. This allows you to monitor and react to Azure Purview events (i.e. consume), and notify Azure Purview of events when they occur (i.e. publish).
 * **Consume Events** - Azure Purview will send notifications about metadata changes to Kafka topic **ATLAS_ENTITIES**. Applications interested in metadata changes can monitor for these notifications. Supported operations include: `ENTITY_CREATE`, `ENTITY_UPDATE`, `ENTITY_DELETE`, `CLASSIFICATION_ADD`, `CLASSIFICATION_UPDATE`, `CLASSIFICATION_DELETE`.
 * **Publish Events** - Azure Purview can be notified of metadata changes via notifications to Kafka topic **ATLAS_HOOK**. Supported operations include: `ENTITY_CREATE_V2`, `ENTITY_PARTIAL_UPDATE_V2`, `ENTITY_FULL_UPDATE_V2`, `ENTITY_DELETE_V2`.
 
 When to use?
 * Applications or processes that need to publish or consume catalog events (i.e. Apache Atlas) in real-time.
+
+## Streaming (Diagnostic Logs)
+Similar to other Azure Services (e.g. [Azure SQL DB/MI](https://docs.microsoft.com/en-us/azure/azure-sql/database/metrics-diagnostic-telemetry-logging-streaming-export-configure?tabs=azure-portal)), Purview allows exporting of event metrics via "Diagnostic settings" to sinks, such as Event Hub. [Available metrics](https://docs.microsoft.com/en-us/azure/purview/how-to-monitor-with-azure-monitor#available-metrics) include _Scan Canceled, Completed, Failed, Time Taken_ etc. Other relevant platform-related diagnostic events should also be available here going forwards.
+
+Once configured, as these events take place within the Purview Account, the platform automatically exports these events to Event Hub as a `JSON` payload. From there, application subscribers that need to consume and act on these events can do so scalably to orchestrate downstream logic.
+
+When to use?
+* Applications or processes that need to consume diagnostic events (i.e. Scan Failed) in real-time.
 
 ## SDK
 Microsoft provides Azure SDKs to programmatically manage and interact with Azure services. Azure Purview client libraries are available in several languages (.NET, Java, JavaScript, and Python), designed to be consistent, approachable, and idiomatic.
