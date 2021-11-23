@@ -15,11 +15,23 @@ This article provides a summary of the options available, and guidance on what t
 
 | Tool Type | Tool | Scenario | Management | Catalog | Scanning |
 | --- | --- | --- | --- | --- | --- |
+**Resource Management** | <ul><li><a href="https://docs.microsoft.com/en-us/azure/templates/" target="_blank">ARM Templates</a></li><li><a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/purview_account" target="_blank">Terraform</a></li></ul> | Infrastructure as Code | ✓ | | |
 **Command Line** | <ul><li><a href="https://docs.microsoft.com/en-us/cli/azure/purview?view=azure-cli-latest" target="_blank">Azure CLI</a></li><li><a href="https://docs.microsoft.com/en-us/powershell/module/az.purview/?view=azps-6.6.0" target="_blank">Azure PowerShell</a></li></ul> | Interactive | ✓ | | |
 **API** | <ul><li><a href="https://docs.microsoft.com/en-us/rest/api/purview/" target="_blank">REST API</a></li></ul> | On-Demand | ✓ | ✓ | ✓ |
 **Streaming** (Atlas Kafka) | <ul><li><a href="https://docs.microsoft.com/en-us/azure/purview/manage-kafka-dotnet" target="_blank">Apache Kafka</a></li></ul> | Real-Time | | ✓ | |
-**Streaming** (Diagnostic Logs) | <ul><li><a href="https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?tabs=CMD#destinations" target="_blank">Bring-your-own Event Hub</a></li></ul> | Real-Time | | | ✓ |
-**SDK** | <ul><li><a href="https://docs.microsoft.com/en-us/dotnet/api/overview/azure/?view=azure-dotnet-preview" target="_blank">.NET</a></li><li><a href="https://docs.microsoft.com/en-us/java/api/overview/azure/?view=azure-java-preview" target="_blank">Java</a></li><li><a href="https://docs.microsoft.com/en-us/javascript/api/overview/azure/?view=azure-node-preview" target="_blank">JavaScript</a></li><li><a href="https://docs.microsoft.com/en-us/python/api/overview/azure/?view=azure-python-preview" target="_blank">Python</a></li></ul> | Custom | ✓ | ✓ | ✓ |
+**Streaming** (Diagnostic Logs) | <ul><li><a href="https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings?tabs=CMD#destinations" target="_blank">Event Hub</a></li></ul> | Real-Time | | | ✓ |
+**SDK** | <ul><li><a href="https://docs.microsoft.com/en-us/dotnet/api/overview/azure/?view=azure-dotnet-preview" target="_blank">.NET</a></li><li><a href="https://docs.microsoft.com/en-us/java/api/overview/azure/?view=azure-java-preview" target="_blank">Java</a></li><li><a href="https://docs.microsoft.com/en-us/javascript/api/overview/azure/?view=azure-node-preview" target="_blank">JavaScript</a></li><li><a href="https://docs.microsoft.com/en-us/python/api/overview/azure/?view=azure-python-preview" target="_blank">Python</a></li></ul> | Custom Development | ✓ | ✓ | ✓ |
+
+## Resource Management
+[Azure Resource Manager (ARM)](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview) is a deployment and management service in Azure that provides a management layer, enabling customers to create, update, and delete resources (e.g. Azure Purview Account) in your Azure subscription.
+
+While there are several methods in which the management service can be invoked (e.g. CLI, PowerShell, SDK), a common pattern is to build and deploy templates so that resources can be deployed consistently and repetedly (i.e. Infrastructure as Code).
+
+To implement infrastructure as code for Azure resources including Azure Purview, we can build [ARM templates](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) using JSON or [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview), or open-source alternatives such as [Terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/overview). 
+
+When to use?
+* Instances where you are required to repeatedly deploy Azure Purview, templates ensure resources are deployed in a consistent manner.
+* When coupled with [deployment scripts](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template), templated solutions can traverse the control and data planes.
 
 ## Command Line
 Azure CLI and Azure PowerShell are command-line tools that enable you to manage Azure resources such as Azure Purview. Note: Only a subset of Azure Purview control plane operations (e.g. account management) are currently available via the command-line, for an up to date list of commands currently available, check out the documentation ([Azure CLI](https://docs.microsoft.com/en-us/cli/azure/purview?view=azure-cli-latest) | [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/module/az.purview/?view=azps-6.6.0)).
@@ -46,9 +58,9 @@ When to use?
 * Applications or processes that need to publish or consume catalog events (i.e. Apache Atlas) in real-time.
 
 ## Streaming (Diagnostic Logs)
-Similar to other Azure Services (e.g. [Azure SQL DB/MI](https://docs.microsoft.com/en-us/azure/azure-sql/database/metrics-diagnostic-telemetry-logging-streaming-export-configure?tabs=azure-portal)), Purview allows exporting of event metrics via "Diagnostic settings" to sinks, such as Event Hub. [Available metrics](https://docs.microsoft.com/en-us/azure/purview/how-to-monitor-with-azure-monitor#available-metrics) include _Scan Canceled, Completed, Failed, Time Taken_ etc. Other relevant platform-related diagnostic events should also be available here going forwards.
+Similar to other Azure Services, Azure Purview can send platform logs and metrics via "Diagnostic settings" to one or more destinations (e.g. Log Analytics Workspace, Storage Account, or Event Hub). [Available metrics](https://docs.microsoft.com/en-us/azure/purview/how-to-monitor-with-azure-monitor#available-metrics) include `Data Map Capacity Units`, `Data Map Storage Size`, `Scan Canceled`, `Scan Completed`, `Scan Failed`, and `Scan Time Taken`.
 
-Once configured, as these events take place within the Purview Account, the platform automatically exports these events to Event Hub as a `JSON` payload. From there, application subscribers that need to consume and act on these events can do so scalably to orchestrate downstream logic.
+Once configured, as these events take place within the Purview Account, the platform automatically sends these events to the destination as a JSON payload. From there, application subscribers that need to consume and act on these events can do so scalably to orchestrate downstream logic.
 
 When to use?
 * Applications or processes that need to consume diagnostic events (i.e. Scan Failed) in real-time.
