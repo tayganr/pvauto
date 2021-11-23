@@ -31,7 +31,7 @@ To implement infrastructure as code for Azure resources including Azure Purview,
 
 When to use?
 * Instances where you are required to repeatedly deploy Azure Purview, templates ensure resources are deployed in a consistent manner.
-* When coupled with [deployment scripts](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template), templated solutions can traverse the control and data planes.
+* When coupled with [deployment scripts](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template), templated solutions can traverse the control and data planes helping facilitate the deployment of end-to-end solutions (e.g. provision an Azure Purview account, register sources, trigger scans).
 
 ## Command Line
 Azure CLI and Azure PowerShell are command-line tools that enable you to manage Azure resources such as Azure Purview. Note: Only a subset of Azure Purview control plane operations (e.g. account management) are currently available via the command-line, for an up to date list of commands currently available, check out the documentation ([Azure CLI](https://docs.microsoft.com/en-us/cli/azure/purview?view=azure-cli-latest) | [Azure PowerShell](https://docs.microsoft.com/en-us/powershell/module/az.purview/?view=azps-6.6.0)).
